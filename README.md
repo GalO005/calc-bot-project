@@ -64,7 +64,7 @@ The Node.js application handles incoming messages, performs calculations, and st
 
 1. **Build and Start Services**: Use Docker Compose to build and start the services.
    ```sh
-   docker-compose up --build
+   docker compose up --build
    ```
 2. **Access the Application**:
    - React application: `http://localhost:5173`
