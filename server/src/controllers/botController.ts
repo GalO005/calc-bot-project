@@ -12,7 +12,8 @@ export const handleBotCommands = (io: Server, socket: Socket): void => {
   socket.on("sendMessage", (msg: Message) => {
     console.log(`message: ${msg.text}`);
     io.emit("receiveMessage", msg);
-    if (msg.text === "history") {
+    const text: string = msg.text.trim();
+    if (text.toLowerCase() === "history") {
       console.log("History command received");
       getCalc().then((calc) => {
         const results: string[] = [];
@@ -26,10 +27,10 @@ export const handleBotCommands = (io: Server, socket: Socket): void => {
       });
     } else {
       try {
-        const result = calculateExpression(msg.text);
-        saveCalculation(msg.text, result.toString());
+        const result = calculateExpression(text);
+        saveCalculation(text, result.toString());
         const botReply = {
-          text: `${msg.text} = ${result}`,
+          text: `${text} = ${result}`,
         };
         io.emit("receiveMessage", botReply);
       } catch (error) {
