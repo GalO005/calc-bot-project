@@ -17,10 +17,11 @@ app.use(express.json());
 connectDB();
 
 io.on("connection", (socket: Socket) => {
-  console.log(`a user connected ${socket.id}`);
-  socket.on("disconnect", () => {
-    console.log(`a user disconnected ${socket.id}`);
+    console.log(`a user connected ${socket.id}`);
+    socket.on("disconnect", () => {
+      console.log(`a user disconnected ${socket.id}`);
+    });
   });
-});
 
-export default app;
+
+export default server;
