@@ -5,6 +5,7 @@ services:
       dockerfile: Dockerfile.node
     ports:
       - "3000:3000"
+    hostname: node-server
     volumes:
       - ./server:/server
       - /server/node_modules
@@ -18,12 +19,14 @@ services:
       context: ./client
       dockerfile: Dockerfile.react
     ports:
-      - "5173:5000"
+      - "5173:5173"
     volumes:
       - ./client:/app
       - /app/node_modules
     depends_on:
       - node-server
+    networks:
+      - app-network
   
 
   mongo:
