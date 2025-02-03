@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
-const socket = io("http://localhost:3000");
+const socket = io("http://node-server:3000");
 
 interface Message {
   id: string;
