@@ -1,11 +1,11 @@
 import './App.css'
-import { Button } from './components/ui/button'
+import Chat from './components/Chat'
 
 function App() {
 
   return (
     <>
-     <Button>Init</Button>
+     <Chat />
     </>
   )
 }
