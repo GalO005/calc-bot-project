@@ -1,5 +1,5 @@
 import { Server, Socket } from "socket.io";
-import { evaluateExpression } from "../services/CalculatorService";
+import calculateExpression from "../services/CalculatorService";
 import saveCalculation from "../services/saveCalculations";
 import getCalc from "../services/getCalculations";
 
@@ -26,7 +26,7 @@ export const handleBotCommands = (io: Server, socket: Socket): void => {
       });
     } else {
       try {
-        const result = evaluateExpression(msg.text);
+        const result = calculateExpression(msg.text);
         saveCalculation(msg.text, result.toString());
         const botReply = {
           text: `${msg.text} = ${result}`,
