@@ -47,10 +47,10 @@ export default function Chat() {
   return (
     <div className="max-w-md mx-auto p-4 bg-white rounded-lg shadow-md flex flex-col h-96">
       <ScrollArea className="flex-1 p-2 border rounded-lg overflow-y-auto">
-        {messages.map((msg) => (
+        {messages.map((msg, idx) => (
           <div
-            key={msg.id}
-            className={`p-2 my-1 rounded-lg max-w-[75%] ${
+            key={idx}
+            className={`p-2 my-1 rounded-lg max-w-[75%] whitespace-pre-line ${
               msg.sender === "user"
                 ? "bg-blue-500 text-white ml-auto"
                 : "bg-gray-200 text-black"
