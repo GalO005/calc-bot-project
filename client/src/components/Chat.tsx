@@ -7,7 +7,6 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 const socket = io("http://localhost:3000");
 
 interface Message {
-  id: string;
   text: string;
   sender: "user" | "bot";
 }
@@ -19,6 +18,7 @@ export default function Chat() {
 
   useEffect(() => {
     socket.on("receiveMessage", (message: Message) => {
+        console.log(message);
       setMessages((prev) => [...prev, message]);
     });
 
@@ -31,7 +31,6 @@ export default function Chat() {
     if (!input.trim()) return;
 
     const newMessage: Message = {
-      id: crypto.randomUUID(),
       text: input,
       sender: "user",
     };
