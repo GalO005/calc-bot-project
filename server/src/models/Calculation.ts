@@ -1,9 +1,17 @@
-import mongoose from 'mongoose';
+import { Document, Schema, model } from 'mongoose';
 
-const CalculationSchema = new mongoose.Schema({
-  expression: { type: String, required: true },  
-  result: { type: String, required: true },      
-  timestamp: { type: Date, default: Date.now }
+interface CalculationDocument extends Document {
+  expression: string;
+  result: string;
+  timestamp: Date;
+}
+
+const CalculationSchema = new Schema<CalculationDocument>({
+  expression: { type: String, required: true },
+  result: { type: String, required: true },
+  timestamp: { type: Date, required: true }
 });
 
-export const Calculation = mongoose.model('Calculation', CalculationSchema);
+const Calculation = model<CalculationDocument>('Calculation', CalculationSchema);
+
+export { Calculation, CalculationDocument };
