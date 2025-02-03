@@ -9,7 +9,7 @@ interface CalculationDocument extends Document {
 const CalculationSchema = new Schema<CalculationDocument>({
   expression: { type: String, required: true },
   result: { type: String, required: true },
-  timestamp: { type: Date, required: true }
+  timestamp: { type: Date, default: Date.now }
 });
 
 const Calculation = model<CalculationDocument>('Calculation', CalculationSchema);
