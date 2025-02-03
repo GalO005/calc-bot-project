@@ -12,6 +12,7 @@ export const handleBotCommands = (io: Server, socket: Socket): void => {
   socket.on("sendMessage", (msg: Message) => {
     console.log(`message: ${msg.text}`);
     io.emit("receiveMessage", msg);
+    let botReply;
     const text: string = msg.text.trim();
     if (text.toLowerCase() === "history") {
       console.log("History command received");
@@ -20,7 +21,7 @@ export const handleBotCommands = (io: Server, socket: Socket): void => {
         calc.forEach((calculation) => {
           results.push(`${calculation.expression} = ${calculation.result}`);
         });
-        const botReply = {
+        botReply = {
           text: results.join("\n"),
         };
         io.emit("receiveMessage", botReply);
@@ -28,10 +29,16 @@ export const handleBotCommands = (io: Server, socket: Socket): void => {
     } else {
       try {
         const result = calculateExpression(text);
-        saveCalculation(text, result.toString());
-        const botReply = {
-          text: `${text} = ${result}`,
-        };
+        if (typeof result === 'number' && !isNaN(result)) {
+            saveCalculation(text, result.toString());
+            botReply = {
+            text: `${text} = ${result}`,
+            };
+        } else {
+            botReply = {
+                text: result,
+            };
+        }
         io.emit("receiveMessage", botReply);
       } catch (error) {
         console.error("Error evaluating expression:", error);
