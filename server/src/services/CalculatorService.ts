@@ -36,7 +36,9 @@ const calculateExpression = (expression: string): number | string => {
         case '+': return num1 + num2;
         case '-': return num1 - num2;
         case '*': return num1 * num2;
-        case '/': return num1 / num2;
+        case '/': 
+            if (num2 === 0) throw new Error("Division by zero");
+            return num1 / num2;
         default: throw new Error(`Unknown operator: ${operator}`);
       }
     };
@@ -90,8 +92,8 @@ const calculateExpression = (expression: string): number | string => {
 
     // The final result is the only number left on the number stack
     return numberStack.pop()!;
-  } catch {
-    return 'Error';
+  } catch (e) {
+    return (e as Error).message;
   }
 };
 
